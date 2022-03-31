@@ -1,0 +1,28 @@
+<!-- templates/base.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        {% assets 'main_css' %}
+        <link rel="stylesheet" href="{{ ASSET_URL }}">
+        {% endassets %}
+
+        <title>Game Disruptor 2.0</title>
+    </head>
+    <!--<body class="text-gray-300 font-sans tracking-wider" style="background-color: #17181A">-->
+    <body class="text-gray-300 font-sans tracking-wider" style="background-color: #1F2326">
+        <div class="px-10 divide-y divide-gray-500">
+            <div class="mt-5 mb-2">
+                {% block header %}{% endblock header %}
+            </div>
+            <div id=" ctn">
+                {% block content %}
+                {% endblock content %}
+            </div>
+        </div>
+    </body>
+</html>

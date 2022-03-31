@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <div class="flex justify-between">
+    <div class="text-xl">
+      <div>{{ title }} - Evolution Results</div>
+      <div class="text-sm" id="time_remaining">Time Remaining: Calculating...</div>
+    </div>
+    <button id="evolve-btn" class="rounded shadow-inner px-5 py-1 border-2 border-gray-300 hover:bg-blue-500 h-full opacity-70 hover:opacity-100" onclick="pywebview.api.stop_evolving()">Stop</button>
+  </div>
+
+{% endblock %}
+
+{% block content %}
+<div>
+  <div class="divide-y divide-gray-500">
+    <div class="mb-5">
+      <div id="evolution-progress" class="relative pt-5">
+        <div class="overflow-hidden h-2 text-xs flex rounded bg-purple-200">
+          <div id="evolution-progress-bar" style="width:0%; transition: width 10s;" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-purple-500">
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-5 w-full flex">
+        <img id="evolution-fitness" class="mx-auto" src="" width="640" height="480" />
+        <img id="evolution-pareto" class="mx-auto" src="" width="640" height="480" />
+      </div>
+
+      <div class="mb-5 flex">
+        <div class="w-1/2">
+          <div class="mt-5 pb-1 text-lg w-full">
+            Pareto Front
+          </div>
+
+          <div class="pr-2">
+            <select id="pareto-list" class="w-full rounded shadow-inner p-2 text-sm text-gray-400 active:bg-purple-500" style="background-color: #17181A" size="5" onchange="pywebview.api.hof_selected(this.value)">
+            </select>
+          </div>
+        </div>
+
+        <div class="w-1/2">
+          <div class="mt-5 pb-1 text-lg">
+            Statistics
+          </div>
+
+          <div id="statistics" class="flex flex-wrap">
+
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-5">
+        <div class="mt-5 pb-1 text-lg w-full">
+          Game Variables
+        </div>
+
+        <div id="variables" class="flex flex-wrap">
+
+        </div>
+      </div>
+    </div>
+
+    <div class="pr-5 pb-2">
+      <div class="mb-5">
+        <div class="mt-5 pb-1 text-lg w-full">
+          Distributions
+        </div>
+
+        <div id="distributions" class="">
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!--  <div class="mx-auto my-auto">-->
+<!--     <svg width="58" height="58" viewBox="0 0 58 58" xmlns="http://www.w3.org/2000/svg" class="animate-spin stroke-current fill-current text-purple-500">-->
+<!--        <g fill="none" fill-rule="evenodd">-->
+<!--            <g transform="translate(2 1)" stroke="#FFF" stroke-width="1.5">-->
+<!--                <circle cx="42.601" cy="11.462" r="5" fill-opacity="1" fill="#fff">-->
+<!--                    <animate attributeName="fill-opacity"-->
+<!--                         begin="0s" dur="1.3s"-->
+<!--                         values="1;0;0;0;0;0;0;0" calcMode="linear"-->
+<!--                         repeatCount="indefinite" />-->
+<!--                </circle>-->
+<!--                <circle cx="49.063" cy="27.063" r="5" fill-opacity="0" fill="#fff">-->
+<!--                    <animate attributeName="fill-opacity"-->
+<!--                         begin="0s" dur="1.3s"-->
+<!--                         values="0;1;0;0;0;0;0;0" calcMode="linear"-->
+<!--                         repeatCount="indefinite" />-->
+<!--                </circle>-->
+<!--                <circle cx="42.601" cy="42.663" r="5" fill-opacity="0" fill="#fff">-->
+<!--                    <animate attributeName="fill-opacity"-->
+<!--                         begin="0s" dur="1.3s"-->
+<!--                         values="0;0;1;0;0;0;0;0" calcMode="linear"-->
+<!--                         repeatCount="indefinite" />-->
+<!--                </circle>-->
+<!--                <circle cx="27" cy="49.125" r="5" fill-opacity="0" fill="#fff">-->
+<!--                    <animate attributeName="fill-opacity"-->
+<!--                         begin="0s" dur="1.3s"-->
+<!--                         values="0;0;0;1;0;0;0;0" calcMode="linear"-->
+<!--                         repeatCount="indefinite" />-->
+<!--                </circle>-->
+<!--                <circle cx="11.399" cy="42.663" r="5" fill-opacity="0" fill="#fff">-->
+<!--                    <animate attributeName="fill-opacity"-->
+<!--                         begin="0s" dur="1.3s"-->
+<!--                         values="0;0;0;0;1;0;0;0" calcMode="linear"-->
+<!--                         repeatCount="indefinite" />-->
+<!--                </circle>-->
+<!--                <circle cx="4.938" cy="27.063" r="5" fill-opacity="0" fill="#fff">-->
+<!--                    <animate attributeName="fill-opacity"-->
+<!--                         begin="0s" dur="1.3s"-->
+<!--                         values="0;0;0;0;0;1;0;0" calcMode="linear"-->
+<!--                         repeatCount="indefinite" />-->
+<!--                </circle>-->
+<!--                <circle cx="11.399" cy="11.462" r="5" fill-opacity="0" fill="#fff">-->
+<!--                    <animate attributeName="fill-opacity"-->
+<!--                         begin="0s" dur="1.3s"-->
+<!--                         values="0;0;0;0;0;0;1;0" calcMode="linear"-->
+<!--                         repeatCount="indefinite" />-->
+<!--                </circle>-->
+<!--                <circle cx="27" cy="5" r="5" fill-opacity="0" fill="#fff">-->
+<!--                    <animate attributeName="fill-opacity"-->
+<!--                         begin="0s" dur="1.3s"-->
+<!--                         values="0;0;0;0;0;0;0;1" calcMode="linear"-->
+<!--                         repeatCount="indefinite" />-->
+<!--                </circle>-->
+<!--            </g>-->
+<!--        </g>-->
+<!--    </svg>-->
+<!--  </div>-->
+</div>
+
+
+{% endblock %}

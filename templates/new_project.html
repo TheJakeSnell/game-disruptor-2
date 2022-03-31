@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<div class="flex justify-between">
+    <div class="text-xl">{{ title }} - Game</div>
+    <button class="rounded shadow-inner px-5 py-1 border-2 border-gray-300 hover:bg-blue-500 h-full opacity-70 hover:opacity-100" onclick="pywebview.api.create_project()">Create</button>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="divide-y divide-gray-500">
+
+  <div class="mt-5 mb-5">
+    <div class="pr-5 ">
+      <div class="text-sm text-gray-400 opacity-70 pb-1">Project Name</div>
+      <input class="rounded shadow-inner p-2 text-sm text-gray-400 w-32" style="background-color: #17181A" value="{{appData['name']}}" id="input_name}" onchange="pywebview.api.update_project_info('name', this.value, window.scrollY)" >
+
+      <div class="mt-2 text-sm text-gray-400 opacity-70 pb-1">Project Folder</div>
+      <input class="rounded shadow-inner p-2 text-sm text-gray-400 w-full" style="background-color: #17181A" value="{{appData['folder_path']}}" id="input_folder_path" onchange="pywebview.api.update_project_info('folder_path', this.value, window.scrollY)" >
+
+      <div class="mt-2 text-sm text-gray-400 opacity-70 pb-1">Simulator Folder</div>
+      <input class="rounded shadow-inner p-2 text-sm text-gray-400 w-full" style="background-color: #17181A" value="{{appData['simulator_path']}}" id="input_simulator_path" onchange="pywebview.api.update_project_info('simulator_path', this.value, window.scrollY)" >
+
+      <div class="mt-2 text-sm text-gray-400 opacity-70 pb-1">Simulator Command</div>
+      <input class="rounded shadow-inner p-2 text-sm text-gray-400 w-full" style="background-color: #17181A" value="{{appData['simulator_command']}}" id="input_simulator_command" onchange="pywebview.api.update_project_info('simulator_command', this.value, window.scrollY)" >
+    </div>
+  </div>
+
+  <div class="mb-5">
+    <div class="flex flex-wrap">
+      <div class="mt-5 pb-1 text-lg">
+        Game Variables
+      </div>
+      <div class="pl-5 pt-4 h-full">
+        <button onclick="pywebview.api.add_data('game_variables', window.scrollY)" class="rounded shadow-inner px-5 py-1 border-2 border-gray-300 hover:bg-blue-500 opacity-70 hover:opacity-100" >Add</button>
+      </div>
+    </div>
+    <div class="flex flex-wrap">
+      {% for key, variable in appData['game_variables'].items() %}
+        <div class="pr-5 mt-5 flex flew-wrap">
+          <input class="rounded shadow-inner p-2 mr-2 text-sm text-gray-400 w-32 bg-opacity-50" style="background-color: #17181A" value="{{key}}" id="game_variables_key_{{key}}" onchange="pywebview.api.update_key('game_variables', '{{key}}', this.value, window.scrollY)" >
+          <div class="p-2 mr-2 text-sm text-gray-400 w-16 bg-opacity-50"> Min: </div>
+          <input class="rounded shadow-inner p-2 mr-2 text-sm text-gray-400 w-32" style="background-color: #17181A" value="{{variable.min}}" id="input_{{key}}_min" onchange="pywebview.api.on_update('game_variables', '{{key}}', 'min', this.value)" >
+          <div class="p-2 mr-2 text-sm text-gray-400 w-16 bg-opacity-50"> Max: </div>
+          <input class="rounded shadow-inner p-2 mr-2 text-sm text-gray-400 w-32" style="background-color: #17181A" value="{{variable.max}}" id="input_{{key}}_max" onchange="pywebview.api.on_update('game_variables', '{{key}}', 'max', this.value)" >
+          <div class="p-2 mr-2 text-sm text-gray-400 w-16 bg-opacity-50"> Type: </div>
+          <select class="rounded shadow-inner text-sm text-gray-400 w-32 h-7" style="background-color: #17181A" id="input_{{key}}_type" onchange="pywebview.api.on_update('game_variables', '{{key}}', 'type', this.value)" >
+            {% if variable.type == "integer" %}
+              <option selected>integer</option>
+              <option>real</option>
+            {% else %}
+              <option>integer</option>
+              <option selected>real</option>
+            {% endif %}
+          </select>
+
+          <button onclick="pywebview.api.remove_data('game_variables', '{{key}}', window.scrollY)" class="my-auto h-full text-red-500 opacity-70 hover:opacity-100">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="mb-5">
+    <div class="mt-5 pb-1 text-lg">
+      Scenarios
+    </div>
+    <div class="flex flex-wrap">
+      {% for value in appData['scenarios'] %}
+      <div class="pr-5 pb-5 flex flex-wrap">
+        <input class="rounded shadow-inner p-2 text-sm text-gray-400 w-32" style="background-color: #17181A" value="{{value}}" id="input_scenario_{{value}}" onchange="pywebview.api.update_array('scenarios', '{{loop.index0}}', this.value, window.scrollY)" >
+        <button onclick="pywebview.api.remove_data('scenarios', '{{value}}', window.scrollY)" class="p-2 text-red-500 opacity-70 hover:opacity-100">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+        </button>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="pr-5 pt-2">
+      <button onclick="pywebview.api.add_data('scenarios', window.scrollY)" class="rounded shadow-inner px-5 py-1 border-2 border-gray-300 hover:bg-blue-500 h-full opacity-70 hover:opacity-100" >Add</button>
+    </div>
+  </div>
+
+  <div class="mb-5">
+    <div class="mt-5 pb-1 text-lg">
+      Scenario Parameters
+    </div>
+    <div class="flex flex-wrap">
+      {% for key, value in appData['scenario_parameters'].items() %}
+        <div class="pr-5 pb-5 flex flew-wrap">
+          <input class="rounded shadow-inner p-2 mr-2 text-sm text-gray-400 w-32 bg-opacity-50" style="background-color: #17181A" value="{{key}}" id="input_key_{{key}}" onchange="pywebview.api.update_key('scenario_parameters', '{{key}}', this.value, window.scrollY)" >
+          <input class="rounded shadow-inner p-2 mr-2 text-sm text-gray-400 w-32" style="background-color: #17181A" value="{{value}}" id="input_{{key}}" onchange="pywebview.api.on_update_scenario('scenario_parameters', '{{key}}', this.value)" >
+
+          <button onclick="pywebview.api.remove_data('scenario_parameters', '{{key}}', window.scrollY)" class="my-auto h-full text-red-500 opacity-70 hover:opacity-100">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="pr-5 pt-2">
+      <button onclick="pywebview.api.add_data('scenario_parameters', window.scrollY)" class="rounded shadow-inner px-5 py-1 border-2 border-gray-300 hover:bg-blue-500 h-full opacity-70 hover:opacity-100" >Add</button>
+    </div>
+  </div>
+
+  <div class="mb-5">
+    <div class="mt-5 pb-1 text-lg">
+      Scenario Statistics
+    </div>
+    <div class="flex flex-wrap">
+      {% for value in appData['scenario_statistics'] %}
+        <div class="pr-5 pb-5 flex flex-wrap">
+          <input class="rounded shadow-inner p-2 text-sm text-gray-400 w-32" style="background-color: #17181A" value="{{value}}" id="input_scenario_statistics_{{value}}" onchange="pywebview.api.update_array('scenario_statistics', '{{loop.index0}}', this.value, window.scrollY)" >
+          <button onclick="pywebview.api.remove_data('scenario_statistics', '{{value}}', window.scrollY)" class="p-2 text-red-500 opacity-70 hover:opacity-100">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+          </button>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="pr-5 pt-2">
+      <button onclick="pywebview.api.add_data('scenario_statistics', window.scrollY)" class="rounded shadow-inner px-5 py-1 border-2 border-gray-300 hover:bg-blue-500 h-full opacity-70 hover:opacity-100" >Add</button>
+    </div>
+  </div>
+
+  <div class="">
+    <div class="mt-5 pb-1 text-lg">
+      Objectives
+    </div>
+    <div class="flex flex-wrap">
+      {% for value in appData['objectives'] %}
+      <div class="pr-5 pb-5 flex flex-wrap">
+        <input class="rounded shadow-inner p-2 text-sm text-gray-400 w-64" style="background-color: #17181A" value="{{value}}" id="input_objectives_{{value}}" onchange="pywebview.api.update_array('objectives', '{{loop.index0}}', this.value, window.scrollY)" >
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="mb-5 flex justify-end">
+    <button class="rounded shadow-inner px-5 py-1 mr-5 mt-5 border-2 border-gray-300 hover:bg-blue-500 h-full opacity-70 hover:opacity-100" onclick="pywebview.api.create_project()">Create</button>
+  </div>
+
+  <script>
+    window.scrollTo(0, {{ scrollPosY }});
+  </script>
+</div>
+
+{% endblock %}

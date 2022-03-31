@@ -1,0 +1,47 @@
+<rts.PhysicalGameState width="15" height="16">
+  <terrain>000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</terrain>
+  <players>
+    <rts.Player ID="0" resources="0">
+    </rts.Player>
+    <rts.Player ID="1" resources="0">
+    </rts.Player>
+  </players>
+  <units>
+    <rts.units.Unit type="Base" ID="5" player="1" x="7" y="0" resources="0" hitpoints="10" >
+    </rts.units.Unit>
+
+    <rts.units.Unit type="RedLight" ID="6" player="1" x="6" y="1" resources="0" hitpoints="10" >
+    </rts.units.Unit>
+    <rts.units.Unit type="RedLight" ID="7" player="1" x="7" y="1" resources="0" hitpoints="10" >
+    </rts.units.Unit>
+    <rts.units.Unit type="RedLight" ID="8" player="1" x="8" y="1" resources="0" hitpoints="10" >
+    </rts.units.Unit>
+
+    <rts.units.Unit type="RedLight2" ID="9" player="1" x="6" y="2" resources="0" hitpoints="10" >
+    </rts.units.Unit>
+    <rts.units.Unit type="RedLight2" ID="11" player="1" x="8" y="2" resources="0" hitpoints="10" >
+    </rts.units.Unit>
+    <rts.units.Unit type="RedLight2" ID="12" player="1" x="7" y="2" resources="0" hitpoints="10" >
+    </rts.units.Unit>
+    <rts.units.Unit type="RedLight2" ID="13" player="1" x="5" y="2" resources="0" hitpoints="10" >
+    </rts.units.Unit>
+    <rts.units.Unit type="RedLight2" ID="14" player="1" x="9" y="2" resources="0" hitpoints="10" >
+    </rts.units.Unit>
+
+
+
+
+    <rts.units.Unit type="Base" ID="21" player="0" x="7" y="15" resources="0" hitpoints="10" >
+    </rts.units.Unit>
+
+    <rts.units.Unit type="BlueLight" ID="22" player="0" x="7" y="14" resources="0" hitpoints="10" >
+    </rts.units.Unit>
+
+    <rts.units.Unit type="BlueLight2" ID="25" player="0" x="6" y="13" resources="0" hitpoints="10" >
+    </rts.units.Unit>
+    <rts.units.Unit type="BlueLight2" ID="27" player="0" x="8" y="13" resources="0" hitpoints="10" >
+    </rts.units.Unit>
+
+
+  </units>
+</rts.PhysicalGameState>

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <div class="flex justify-between">
+    <div class="text-xl">{{ title }} - Host Node: {{ host_ip }} </div>
+  </div>
+
+{% endblock %}
+
+{% block content %}
+<div>
+  <div class="divide-y divide-gray-500 w-full h-64 align-middle">
+    <div class="w-full h-64 p-32 text-center align-middle text-lg" id="status_text">
+      Connecting...
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

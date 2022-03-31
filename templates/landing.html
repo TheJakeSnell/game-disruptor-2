@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% assets 'main_css' %}
+    <link rel="stylesheet" href="{{ ASSET_URL }}">
+    {% endassets %}
+
+    <title>Game Disruptor 2.0</title>
+</head>
+<!--<body class="text-gray-300 font-sans tracking-wider" style="background-color: #17181A">-->
+<body class="text-gray-300 font-sans tracking-wider pywebview-drag-region" style="background-color: #17181A">
+    <div class="">
+        <button onclick="pywebview.api.close()" class="absolute top-0 right-0 px-5 py-1 opacity-70 hover:opacity-100 hover:bg-red-500">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+    </button>
+    <div class="flex h-screen">
+        <div class="w-1/3">
+            {% for project in projects %}
+            <div class="bg-white hover:bg-blue-500 hover:bg-opacity-50 bg-opacity-10 px-5 py-2" onclick="pywebview.api.open_project(JSON.stringify({{ project }}))">
+                <div class="text-sm">
+                    {{ project.name }}
+                </div>
+                <div class="text-xs opacity-70 overflow-ellipsis overflow-hidden">
+                    {{ project.folder_path }}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center bg-gray-500 bg-opacity-30 w-full flex flex-col">
+            <div class="flex-1"></div>
+            <div class="text-5xl font-thin pb-2" >
+                Game Disruptor
+            </div>
+            <div class="text-lg font-thin opacity-50 pb-5">
+                Version: 2.0
+            </div>
+            <button class="opacity-70 flex mx-auto mb-5 hover:text-blue-500" onclick="pywebview.api.empty_project()">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 my-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                </svg>
+                <div class="">
+                    New Project
+                </div>
+            </button>
+            <button class="opacity-70 flex mx-auto hover:text-blue-500" onclick="pywebview.api.open_project()">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 my-auto mx-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z" />
+                </svg>
+                <div class="">
+                    Open or Import
+                </div>
+            </button>
+            <div class="flex-1"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

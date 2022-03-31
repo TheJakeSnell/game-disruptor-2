@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <div class="flex justify-between">
+    <div class="text-xl">
+      <div>{{ title }} - Evolution Results</div>
+    </div>
+    <button id="evolve-btn" class="rounded shadow-inner px-5 py-1 border-2 border-gray-300 hover:bg-blue-500 h-full opacity-70 hover:opacity-100" onclick="window.location='/show_project'">Back</button>
+  </div>
+
+{% endblock %}
+
+{% block content %}
+<div>
+  <div class="divide-y divide-gray-500">
+    <div class="mb-5">
+      <div class="pt-5 w-full flex">
+        <img id="evolution-fitness" class="mx-auto" src="{{ fitness_graph }}" width="640" height="480" />
+        <img id="evolution-pareto" class="mx-auto" src="{{ pareto_graph }}" width="640" height="480" />
+      </div>
+
+      <div class="mb-5 flex">
+        <div class="w-1/2">
+          <div class="mt-5 pb-1 text-lg w-full">
+            Pareto Front
+          </div>
+
+          <div class="pr-2">
+            <select id="pareto-list" class="w-full rounded shadow-inner p-2 text-sm text-gray-400 active:bg-purple-500" style="background-color: #17181A" size="5" onchange="pywebview.api.pareto_selected(this.value)">
+            </select>
+          </div>
+        </div>
+
+        <div class="w-1/2">
+          <div class="mt-5 pb-1 text-lg">
+            Statistics
+          </div>
+
+          <div id="statistics" class="flex flex-wrap">
+
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-5">
+        <div class="mt-5 pb-1 text-lg w-full">
+          Game Variables
+        </div>
+
+        <div id="variables" class="flex flex-wrap">
+
+        </div>
+      </div>
+    </div>
+
+    <div class="pr-5 pb-2">
+      <div class="mb-5">
+        <div class="mt-5 pb-1 text-lg w-full">
+          Distributions
+        </div>
+
+        <div id="distributions" class="">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
