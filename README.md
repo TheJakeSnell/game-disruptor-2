@@ -6,7 +6,7 @@ The pre-built version of the prototype comes with two games already set-up ready
 The latest release can be found in the releases section of this repository here: https://github.com/TheJakeSnell/game-disruptor-2/releases
 
 ## Documentation
-At the root of this repository exists two word documents and one video tutorial that provide an overview of the steps involved to setup and use the Game Disruptor too.
+At the root of this repository exists two word documents and one video tutorial that provide an overview of the steps involved to setup and use the Game Disruptor tool.
 
 ### Game Disruptor 2 - Add Game Documentation.docx
 This document outlines the necessary steps to add a new game to balance for the game disruptor tool and the requirements that a game must met in order to be added. The game disruptor 2.0 tool allows a game or wargame designer to balance their game without requiring any code changes to the tool itself. Instead, minor code changes will be needed to made to the game or simulator that will be used, this is to allow communication between the tool and the game. This limits the number of games a designer can use with the game disruptor tool, to the number of games that they have access to the source code or can request changes to be made on their behalf.
